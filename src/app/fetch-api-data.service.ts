@@ -17,65 +17,24 @@ const username = localStorage.getItem('user');
 @Injectable({
   providedIn: 'root'
 })
-//registration class
-export class UserRegistrationService {
-  // Inject the HttpClient module to the constructor params
- // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) {
-  }
- // Making the api call for the user registration endpoint
+export class FetchApiDataService {
+  constructor(private http: HttpClient) {}
+
+  //registration class
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
     catchError(this.handleError)
-    //The pipe() function takes the functions you want to combine (in this case, there's one method, catchError) as its arguments and will
-    // return a new function that, when executed, runs the composed functions in sequence.
     );
   }
-
-private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-    } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(
-    'Some error occurred; please try again later.'
-    );
-  }
-}
-//Login class
-export class UserLoginService {
-  constructor(private http: HttpClient) {
-  }
- // Making the api call for the user login endpoint
+  //Login class
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
     catchError(this.handleError)
     );
   }
-
-private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-    } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(
-    'Some error occurred; please try again later.'
-    );
-  }
-}
-
-// Get All Movies (private service)
-export class GetAllMoviesService {
-  constructor(private http:HttpClient) { }
-
+  // Get All Movies (private service)
   getAllMovies(): Observable<any> {
     return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
       {
@@ -85,32 +44,7 @@ export class GetAllMoviesService {
         catchError(this.handleError)
       )
   }
-
-  // Non-typed response transaction
-  private extractResponseData(res: Response | Object ): any {
-    const body = res;
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not load Movies Collection, please try again later'
-    );
-  }
-}
-
-
-// Get a single movie by Id (private service)
-export class GetMovieByIdService {
-  constructor(private http:HttpClient) { }
-
+  // Get a single movie by Id (private service)
   getMovie(): Observable<any> {
     return this.http.get(apiUrl + 'movies/id/:movieId', {headers: new HttpHeaders(
       {
@@ -121,31 +55,7 @@ export class GetMovieByIdService {
       )
 
   }
-  // Non-typed response transaction
-  private extractResponseData(res: Response | Object ): any {
-    const body = res;
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not load Movie Object, please try again later'
-    );
-  }
-}
-
-
-// Get a director by name (private service)
-export class GetDirectorByNameService {
-  constructor(private http:HttpClient) { }
-
+  // Get a director by name (private service)
   getDirector(): Observable<any> {
     return this.http.get(apiUrl + 'movies/director/:name', {headers: new HttpHeaders(
       {
@@ -156,31 +66,7 @@ export class GetDirectorByNameService {
       catchError(this.handleError)
     )
   }
-  // Non-typed response transaction
-  private extractResponseData(res: Response | Object ): any {
-    const body = res;
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not get director detail page, please try again later'
-    );
-  }
-}
-
-
-// Get a genre by name (private service)
-export class GetGenreByNameService {
-  constructor(private http:HttpClient) { }
-
+  // Get a genre by name (private service)
   getGenre(): Observable<any> {
     return this.http.get(apiUrl + 'movies/genre/:name', {headers: new HttpHeaders(
       {
@@ -191,30 +77,7 @@ export class GetGenreByNameService {
       catchError(this.handleError)
     )
   }
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not load genre detail page, please try again later'
-    );
-  }
-  }
-
-
-// Get a User by username (private service)
-  export class GetUserByUsernameService {
-    constructor(private http:HttpClient) { }  
-
+  // Get a User by username (private service)
   getUser(): Observable<any> {
     return this.http.get(apiUrl + `users/${username}`, {headers: new HttpHeaders(
       {
@@ -225,30 +88,7 @@ export class GetGenreByNameService {
       catchError(this.handleError)
     )
   }
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not load User profile, please try again later'
-    );
-  }
-  }
-
-
   // Get the favoritemovies-array of a user (private service)
-  export class GetFavoritesOfUserService {
-    constructor(private http:HttpClient) { }  
-
   getFavoriteMovies(): Observable<any> {
     return this.http.get(apiUrl + `users/${username}/favoritemovies`,
     {headers: new HttpHeaders(
@@ -260,30 +100,7 @@ export class GetGenreByNameService {
       catchError(this.handleError)
     )
   }
-
-  private extractResponseData(res: Response | Object ): any {
-    const body = res;
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not load the Favorite Movies Collection, please try again later'
-    );
-  }}
-
-
   // Add a movie to the favoritemovies-array (private service)
-  export class PostMovieToFavoritesService {
-    constructor(private http:HttpClient) { }  
-
   PostToFavoriteMovies(): Observable<any> {
     return this.http.post(apiUrl + `users/${username}/favoritemovies/:movieId`,
     {headers: new HttpHeaders(
@@ -294,31 +111,8 @@ export class GetGenreByNameService {
       map(this.extractResponseData),
       catchError(this.handleError)
     )
-  } 
-  private extractResponseData(res: Response|Object): any {
-    const body = res;
-    return body || {};
   }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not add entry to Favorite Movies Collection, please try again later'
-    );
-  }
-  }
-
-
   // Edit user profile (private service)
-  export class EditUserProfileService {
-    constructor(private http:HttpClient) { }
-
   EditUserProfile(): Observable<any> {
     return this.http.put(apiUrl + `users/${username}`,
     {headers: new HttpHeaders(
@@ -330,62 +124,19 @@ export class GetGenreByNameService {
         catchError(this.handleError)
       )
   }
-  private extractResponseData(res: Response|Object): any {
-    const body = res;
-    return body || {};
-  }
-  private handleError(error:HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('some error occured: ', error.error.message);
-    } else {
-      console.error(
-        `Error Status Code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not edit user profile, please try again later'
-    );
-  }
-  }
-
   //Delete user profile (private service)
-  export class DeleteUserProfileService {
-    constructor(private http:HttpClient) { }
-
-    DeleteUserProfile(): Observable<any> {
-      return this.http.delete(apiUrl + `users/${username}`,
-      {headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        }
-      )}).pipe(
-        map(this.extractResponseData),
-        catchError(this.handleError)
-      )
-    }
-    private extractResponseData(res: Response|Object): any {
-      const body = res;
-      return body || {};
-    }
-    private handleError(error:HttpErrorResponse): any {
-      if (error.error instanceof ErrorEvent) {
-        console.error('some error occured: ', error.error.message);
-      } else {
-        console.error(
-          `Error Status Code ${error.status}, ` +
-          `Error body is: ${error.error}`
-        );
-      } return throwError(
-        'Could not delete user profile, please try again later'
-      )
-    }
+  DeleteUserProfile(): Observable<any> {
+    return this.http.delete(apiUrl + `users/${username}`,
+    {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      }
+    )}).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    )
   }
-
-
   // Remove a movie from the favoritemovies-array (private service)
-  export class RemoveMovieFromFavoritesService {
-    constructor(private http:HttpClient) { }  
-
   RemoveFromFavoriteMovies(): Observable<any> {
     return this.http.delete(apiUrl + `users/${username}/favoritemovies/:movieId`,
     {headers: new HttpHeaders(
@@ -397,21 +148,22 @@ export class GetGenreByNameService {
       catchError(this.handleError)
     )
   } 
-  private extractResponseData(res: Response|Object): any {
+  // Non-typed response transaction
+  private extractResponseData(res: Response | Object ): any {
     const body = res;
     return body || {};
   }
-
+  //Handle Error
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('some error occured:', error.error.message);
+    console.error('Some error occurred:', error.error.message);
     } else {
-      console.error(
+    console.error(
         `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`
-      );
-    } return throwError(
-      'Could not remove entry from the favoritemovies collection, please try again later'
+        `Error body is: ${error.error}`);
+    }
+    return throwError(
+    'Some error occurred; please try again later.'
     );
   }
-  }
+}
