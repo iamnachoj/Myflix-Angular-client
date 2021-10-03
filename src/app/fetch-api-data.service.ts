@@ -17,6 +17,7 @@ const username = localStorage.getItem('user');
 @Injectable({
   providedIn: 'root'
 })
+//registration class
 export class UserRegistrationService {
   // Inject the HttpClient module to the constructor params
  // This will provide HttpClient to the entire class, making it available via this.http
@@ -41,10 +42,36 @@ private handleError(error: HttpErrorResponse): any {
         `Error body is: ${error.error}`);
     }
     return throwError(
-    'Something bad happened; please try again later.'
+    'Some error occurred; please try again later.'
     );
   }
 }
+//Login class
+export class UserLoginService {
+  constructor(private http: HttpClient) {
+  }
+ // Making the api call for the user login endpoint
+  public userLogin(userDetails: any): Observable<any> {
+    console.log(userDetails);
+    return this.http.post(apiUrl + 'login', userDetails).pipe(
+    catchError(this.handleError)
+    );
+  }
+
+private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+    console.error('Some error occurred:', error.error.message);
+    } else {
+    console.error(
+        `Error Status code ${error.status}, ` +
+        `Error body is: ${error.error}`);
+    }
+    return throwError(
+    'Some error occurred; please try again later.'
+    );
+  }
+}
+
 // Get All Movies (private service)
 export class GetAllMoviesService {
   constructor(private http:HttpClient) { }
