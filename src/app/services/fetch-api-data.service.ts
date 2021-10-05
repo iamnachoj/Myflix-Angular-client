@@ -36,7 +36,7 @@ export class FetchApiDataService {
   }
   // Get All Movies (private service)
   getAllMovies(): Observable<any> {
-    return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
+    return this.http.get(apiUrl + 'API/movies', {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
