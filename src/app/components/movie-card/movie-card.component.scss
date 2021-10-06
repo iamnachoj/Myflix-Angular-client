@@ -7,12 +7,16 @@
 .favorite-button {
   float: right;
   cursor: pointer;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 
 .favorite-button-active {
   float: right;
   color: red;
   cursor: pointer;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 
 .mat-card-header {
@@ -23,11 +27,15 @@
 }
 
 .mat-card-title {
+  max-width: 300px;
+  margin-top: 40px;
+  margin-bottom: 10px;
   font-family: "Ubuntu-Medium", Roboto;
 }
 
 .mat-card-subtitle {
   font-family: "Ubuntu-Light", Roboto;
+  margin-bottom: 30px;
 }
 
 .mat-card-content {
