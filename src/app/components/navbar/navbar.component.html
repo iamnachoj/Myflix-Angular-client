@@ -1,0 +1,32 @@
+<mat-toolbar class="top-nav-container">
+      
+  <img class="app-logo" src='../../../assets/logo.png' alt="myFlix Angular" />
+
+  <span class="top-nav"></span>
+  <div>
+  <button
+    mat-button
+    (click)='openAllMovies()'
+  >
+  All Movies
+  </button>
+  <button
+    mat-button
+    (click)='openUserProfile()'
+  >
+  User Profile
+  </button>
+  <button
+    mat-button
+    (click)='openFavorites()'
+  >
+  Favorite Movies
+  </button>
+  <button
+    mat-button
+    (click)='logOut()'
+  >
+  Log out
+  </button>
+  </div>
+</mat-toolbar>

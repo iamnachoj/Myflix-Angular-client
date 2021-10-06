@@ -12,7 +12,7 @@ const apiUrl = 'https://myflix-lounge.herokuapp.com/';
 // Get token from local storage for requests
 const token = localStorage.getItem('token');
 // Get username from localStorage for URLs
-const username = localStorage.getItem('user');
+const username = localStorage.getItem('Name');
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class FetchApiDataService {
   }
   // Get All Movies (private service)
   getAllMovies(): Observable<any> {
-    return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
+    return this.http.get(apiUrl + 'API/movies', {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -46,7 +46,7 @@ export class FetchApiDataService {
   }
   // Get a single movie by Id (private service)
   getMovie(): Observable<any> {
-    return this.http.get(apiUrl + 'movies/id/:movieId', {headers: new HttpHeaders(
+    return this.http.get(apiUrl + 'API/movies/:Title', {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -56,29 +56,29 @@ export class FetchApiDataService {
 
   }
   // Get a director by name (private service)
-  getDirector(): Observable<any> {
-    return this.http.get(apiUrl + 'movies/director/:name', {headers: new HttpHeaders(
-      {
-        Authorization: 'Bearer '+ token,
-      }
-    )}).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    )
-  }
+  // getDirector(): Observable<any> {
+  //   return this.http.get(apiUrl + 'movies/director/:name', {headers: new HttpHeaders(
+  //     {
+  //       Authorization: 'Bearer '+ token,
+  //     }
+  //   )}).pipe(
+  //     map(this.extractResponseData),
+  //     catchError(this.handleError)
+  //   )
+  // }
   // Get a genre by name (private service)
-  getGenre(): Observable<any> {
-    return this.http.get(apiUrl + 'movies/genre/:name', {headers: new HttpHeaders(
-      {
-        Authorization: 'Bearer ' + token,
-      }
-    )}).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    )
-  }
+  // getGenre(): Observable<any> {
+  //   return this.http.get(apiUrl + 'movies/genre/:name', {headers: new HttpHeaders(
+  //     {
+  //       Authorization: 'Bearer ' + token,
+  //     }
+  //   )}).pipe(
+  //     map(this.extractResponseData),
+  //     catchError(this.handleError)
+  //   )
+  // }
   // Get a User by username (private service)
-  getUser(): Observable<any> {
+  getUser(username: any): Observable<any> {
     return this.http.get(apiUrl + `users/${username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
@@ -89,20 +89,20 @@ export class FetchApiDataService {
     )
   }
   // Get the favoritemovies-array of a user (private service)
-  getFavoriteMovies(): Observable<any> {
-    return this.http.get(apiUrl + `users/${username}/favoritemovies`,
-    {headers: new HttpHeaders(
-      {
-        Authorization: 'Bearer ' + token,
-      }
-    )}).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    )
-  }
+  // getFavoriteMovies(): Observable<any> {
+  //   return this.http.get(apiUrl + `users/${username}/favoritemovies`,
+  //   {headers: new HttpHeaders(
+  //     {
+  //       Authorization: 'Bearer ' + token,
+  //     }
+  //   )}).pipe(
+  //     map(this.extractResponseData),
+  //     catchError(this.handleError)
+  //   )
+  // }
   // Add a movie to the favoritemovies-array (private service)
-  PostToFavoriteMovies(): Observable<any> {
-    return this.http.post(apiUrl + `users/${username}/favoritemovies/:movieId`,
+  postToFavoriteMovies(id : any): Observable<any> {
+    return this.http.post(apiUrl + `users/${username}/Movies/${id}`,
     {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
@@ -113,8 +113,8 @@ export class FetchApiDataService {
     )
   }
   // Edit user profile (private service)
-  EditUserProfile(): Observable<any> {
-    return this.http.put(apiUrl + `users/${username}`,
+  EditUserProfile(userData:any): Observable<any> {
+    return this.http.put(apiUrl + `users/${username}`, userData,
     {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token, 
@@ -137,8 +137,8 @@ export class FetchApiDataService {
     )
   }
   // Remove a movie from the favoritemovies-array (private service)
-  RemoveFromFavoriteMovies(): Observable<any> {
-    return this.http.delete(apiUrl + `users/${username}/favoritemovies/:movieId`,
+  removeFromFavoriteMovies(id : any): Observable<any> {
+    return this.http.delete(apiUrl + `users/${username}/Movies/${id}`,
     {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
