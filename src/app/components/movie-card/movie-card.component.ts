@@ -92,11 +92,10 @@ export class MovieCardComponent {
    * @param title (movie title)
    * @param imageUrl (movie image/cover)
    * @param description (movie description)
-   * @param year (year of release)
    */
-  openSynopsis(title:string, imageUrl:any, description:string, year:number): void {
+  openSynopsis(title:string, imageUrl:any, description:string): void {
     this.dialog.open(SynopsisCardComponent, {
-      data: {title, imageUrl, description, year},
+      data: {title, imageUrl, description},
       width: '500px'
     });
   }
