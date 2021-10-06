@@ -59,6 +59,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['welcome']);
     localStorage.removeItem('Name');
     localStorage.removeItem('token');
+    setTimeout(() => location.reload(), 200);
     this.snackBar.open('Logout successful!', 'OK', {
       duration: 3000
     });
