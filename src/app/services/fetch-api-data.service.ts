@@ -113,8 +113,8 @@ export class FetchApiDataService {
     )
   }
   // Edit user profile (private service)
-  EditUserProfile(): Observable<any> {
-    return this.http.put(apiUrl + `users/${username}`,
+  EditUserProfile(userData:any): Observable<any> {
+    return this.http.put(apiUrl + `users/${username}`, userData,
     {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token, 
