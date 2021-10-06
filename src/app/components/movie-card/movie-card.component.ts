@@ -78,12 +78,11 @@ export class MovieCardComponent {
    * opens director modal with infos about director
    * @param name (director name)
    * @param bio (director bio)
-   * @param birthYear (director birthYear)
-   * @param deathYear (director deathYear)
+   * @param birth
    */
-  openDirector(name:string, bio:string, Birth:number ): void {
+  openDirector(name:string, bio:string, birth:number ): void {
     this.dialog.open(DirectorCardComponent, {
-      data: {name, bio, Birth},
+      data: {name, bio, birth},
       width: '500px'
     });
   }
