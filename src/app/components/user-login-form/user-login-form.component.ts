@@ -10,6 +10,7 @@ import { FetchApiDataService } from '../../services/fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 // Router
 import { Router } from '@angular/router';
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-login-form',
@@ -31,13 +32,14 @@ ngOnInit(): void {}
 // This is the function responsible for sending the form inputs to the backend
 loginUser(): void {
       this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-        localStorage.setItem('username', result.user.username);
+        localStorage.setItem('Name', result.user.Name);
         localStorage.setItem('token', result.token);
       this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open(result, 'OK', {
           duration: 2000
       });
       this.router.navigate(['movies']);
+      setTimeout(() => location.reload(), 1000);
       }, (result) => {
         this.snackBar.open(result, 'OK', {
           duration: 2000
