@@ -26,24 +26,22 @@ constructor(
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar) { }
 
-ngOnInit(): void {
-}
+ngOnInit(): void {}
 
 // This is the function responsible for sending the form inputs to the backend
 loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-      localStorage.setItem('username', result.user.username);
-      localStorage.setItem('token', result.token);
-     this.dialogRef.close(); // This will close the modal on success!
-     this.snackBar.open(result, 'OK', {
-        duration: 2000
-     });
-     this.router.navigate(['movies']);
-    }, (result) => {
+      this.fetchApiData.userLogin(this.userData).subscribe((result) => {
+        localStorage.setItem('username', result.user.username);
+        localStorage.setItem('token', result.token);
+      this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open(result, 'OK', {
-        duration: 2000
+          duration: 2000
       });
-    });
-  }
-  
+      this.router.navigate(['movies']);
+      }, (result) => {
+        this.snackBar.open(result, 'OK', {
+          duration: 2000
+        });
+      });
+    }
   }
