@@ -11,6 +11,7 @@ import { ProfileEditComponent } from '../profile-edit/profile-edit.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCard } from '@angular/material/card';
+import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'app-profile-view',
@@ -43,6 +44,7 @@ export class ProfileViewComponent implements OnInit {
     let user = localStorage.getItem('Name');
     this.fetchApiData.getUser(user).subscribe((res: any) => {
       this.user = res;
+      this.user.Birthday = new Date(this.user.Birthday).toDateString() 
     });
   }
 
@@ -54,7 +56,6 @@ export class ProfileViewComponent implements OnInit {
       width: '500px'
     })
   }
-
 
 
 }
