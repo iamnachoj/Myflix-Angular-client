@@ -1,0 +1,12 @@
+{
+  "entryPoints": [
+    "./src/main.ts", 
+    "./src/app/app.component.ts", 
+    "./src/app/services/fetch-api-data.service.ts", 
+    "./src/app/components/welcome-page/welcome-page.component.ts",
+    "./src/app/components/user-registration-form/user-registration-form.component.ts",
+    "./src/app/components/user-login-form/user-login-form.component.ts",
+    "./src/app/components/movie-card/movie-card.component.ts"
+  ],
+  "out": "doc"
+}

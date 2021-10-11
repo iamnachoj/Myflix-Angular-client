@@ -17,7 +17,16 @@ const username = localStorage.getItem('Name');
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Class that communicates with API (MOVIE-API). From here, using Angular we set public functions to allow the rest of the app to communicate with the API
+ * There are definitions for all CRUD operations possible with MOVIE-API.
+ */
 export class FetchApiDataService {
+  /**
+   * httpclient method from Angular
+   * @constructor
+   * @param http 
+   */
   constructor(private http: HttpClient) {}
 
   //registration class
@@ -55,28 +64,6 @@ export class FetchApiDataService {
       )
 
   }
-  // Get a director by name (private service)
-  // getDirector(): Observable<any> {
-  //   return this.http.get(apiUrl + 'movies/director/:name', {headers: new HttpHeaders(
-  //     {
-  //       Authorization: 'Bearer '+ token,
-  //     }
-  //   )}).pipe(
-  //     map(this.extractResponseData),
-  //     catchError(this.handleError)
-  //   )
-  // }
-  // Get a genre by name (private service)
-  // getGenre(): Observable<any> {
-  //   return this.http.get(apiUrl + 'movies/genre/:name', {headers: new HttpHeaders(
-  //     {
-  //       Authorization: 'Bearer ' + token,
-  //     }
-  //   )}).pipe(
-  //     map(this.extractResponseData),
-  //     catchError(this.handleError)
-  //   )
-  // }
   // Get a User by username (private service)
   getUser(username: any): Observable<any> {
     return this.http.get(apiUrl + `users/${username}`, {headers: new HttpHeaders(
@@ -88,18 +75,6 @@ export class FetchApiDataService {
       catchError(this.handleError)
     )
   }
-  // Get the favoritemovies-array of a user (private service)
-  // getFavoriteMovies(): Observable<any> {
-  //   return this.http.get(apiUrl + `users/${username}/favoritemovies`,
-  //   {headers: new HttpHeaders(
-  //     {
-  //       Authorization: 'Bearer ' + token,
-  //     }
-  //   )}).pipe(
-  //     map(this.extractResponseData),
-  //     catchError(this.handleError)
-  //   )
-  // }
   // Add a movie to the favoritemovies-array (private service)
   postToFavoriteMovies(id : any): Observable<any> {
     return this.http.post(apiUrl + `users/${username}/Movies/${id}`,
